@@ -6,6 +6,7 @@
         <router-link to="/CreaPost" class="block py-2 px-4 text-gray-700 hover:bg-gray-200">Crea Post</router-link>
         <router-link to="/CreaImmagine" class="block py-2 px-4 text-gray-700 hover:bg-gray-200">Crea Immagine</router-link>
         <router-link to="/CreaCommento" class="block py-2 px-4 text-gray-700 hover:bg-gray-200">Crea Commento</router-link>
+        <router-link to="/Config" class="block py-2 px-4 text-gray-700 hover:bg-gray-200">Configurazione</router-link>
         <a @click="logout" class="block py-2 px-4 text-gray-700 hover:bg-gray-200 cursor-pointer">Logout</a>
       </nav>
     </aside>
@@ -14,10 +15,6 @@
     <main class="flex-1 p-10 overflow-y-auto">
       <h1 class="text-2xl font-bold mb-5">Crea Post</h1>
       <div class="space-y-4">
-        <div>
-          <label class="block text-sm font-medium text-gray-700">ChatGPT Key</label>
-          <input v-model="chatgptKey" type="password" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2">
-        </div>
         <div>
           <label class="block text-sm font-medium text-gray-700">URL</label>
           <input v-model="url" type="text" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2">
@@ -48,7 +45,6 @@ import axios from 'axios';
 export default {
   data() {
     return {
-      chatgptKey: '',
       url: '',
       contenutoAlternativo: '',
       prompt: `# Generatore di Post per LinkedIn
@@ -79,8 +75,9 @@ Ecco l'<ARTICOLO>:`,
   },
   methods: {
     async generaPost() {
-      if (!this.chatgptKey || (!this.url && !this.contenutoAlternativo) || !this.prompt) {
-        alert('Per favore, compila il campo ChatGPT Key, il Prompt e fornisci un URL o il contenuto della pagina.');
+      const chatgptKey = localStorage.getItem('chatgptKey')
+      if (!chatgptKey || (!this.url && !this.contenutoAlternativo) || !this.prompt) {
+        alert('Per favore, assicurati di aver configurato la chiave API e fornisci un URL o il contenuto della pagina.');
         return;
       }
 
@@ -90,15 +87,13 @@ Ecco l'<ARTICOLO>:`,
         let articleContent;
 
         if (this.url) {
-          // Se l'URL è fornito, otteniamo il contenuto dell'articolo dall'URL
           const articleResponse = await axios.get(this.url);
           articleContent = articleResponse.data;
         } else {
-          // Altrimenti, usiamo il contenuto alternativo fornito
           articleContent = this.contenutoAlternativo;
         }
+        articleContent = this.prompt +articleContent;
 
-        // Ora, generiamo il post utilizzando l'API di ChatGPT
         const response = await axios.post('https://api.openai.com/v1/chat/completions', {
           model: "gpt-3.5-turbo",
           messages: [
@@ -113,7 +108,7 @@ Ecco l'<ARTICOLO>:`,
           ]
         }, {
           headers: {
-            'Authorization': `Bearer ${this.chatgptKey}`,
+            'Authorization': `Bearer ${chatgptKey}`,
             'Content-Type': 'application/json'
           }
         });
@@ -127,11 +122,8 @@ Ecco l'<ARTICOLO>:`,
       }
     },
     logout() {
-      // Implementa qui la logica per il logout
-      console.log('Logout');
-      // Esempio: rimuovi il token di autenticazione dallo storage e reindirizza alla pagina di login
-      localStorage.removeItem('authToken');
-      this.$router.push('/login');
+      localStorage.removeItem('chatgptKey');
+      this.$router.push('/config');
     }
   }
 }
