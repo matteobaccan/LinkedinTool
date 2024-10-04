@@ -16,7 +16,7 @@
       <div class="space-y-4">
         <div>
           <label class="block text-sm font-medium text-gray-700">Post</label>
-          <textarea v-model="post" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm"></textarea>
+          <textarea v-model="post" rows="10" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm"></textarea>
         </div>
         <div>
           <label class="block text-sm font-medium text-gray-700">Prompt</label>
@@ -26,13 +26,17 @@
           <label class="block text-sm font-medium text-gray-700">Risultato</label>
           <textarea v-model="risultato" rows="10" readonly class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm bg-gray-50"></textarea>
         </div>
-        <button @click="generaCommento" class="px-4 py-2 bg-purple-500 text-white rounded-md hover:bg-purple-600">Genera Commento</button>
+        <button @click="generaCommento" class="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 disabled:bg-blue-300" :disabled="isGenerating">
+          {{ isGenerating ? 'Generazione in corso...' : 'Genera Commento' }}
+        </button>
       </div>
     </main>
   </div>
 </template>
 
 <script>
+import axios from 'axios';
+
 export default {
   data() {
     return {
@@ -57,16 +61,44 @@ Ecco il <POST> da commentare:`,
     }
   },
   methods: {
-    generaCommento() {
+    async generaCommento() {
       const chatgptKey = localStorage.getItem('chatgptKey')
-      // Implementa qui la logica per generare il commento
-      console.log('Genera commento utilizzando la chiave:', chatgptKey)
-      // Qui puoi utilizzare chatgptKey per le chiamate API
+      if (!chatgptKey || !this.post || !this.prompt) {
+        alert('Per favore, assicurati di aver configurato la chiave API e fornisci il contenuto della pagina.');
+        return;
+      }
+
+      this.isGenerating = true;
+
+      try {
+        let articleContent = this.prompt + this.post;
+
+        const response = await axios.post('https://api.openai.com/v1/chat/completions', {
+          model: "gpt-3.5-turbo",
+          messages: [
+            {
+              role: "user",
+              content: articleContent
+            }
+          ]
+        }, {
+          headers: {
+            'Authorization': `Bearer ${chatgptKey}`,
+            'Content-Type': 'application/json'
+          }
+        });
+
+        this.risultato = response.data.choices[0].message.content;
+      } catch (error) {
+        console.error('Errore nella generazione del post:', error);
+        alert('Si è verificato un errore durante la generazione del post. Controlla la console per i dettagli.');
+      } finally {
+        this.isGenerating = false;
+      }    
     },
     logout() {
-      // Implementa qui la logica per il logout
-      console.log('Logout')
-      // this.$router.push('/login')
+      localStorage.removeItem('chatgptKey');
+      this.$router.push('/config');
     }
   }
 }
