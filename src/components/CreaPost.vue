@@ -1,20 +1,24 @@
 <template>
-  <div class="flex h-screen bg-gray-100">
-    <!-- Menu laterale (invariato) -->
-    <aside class="w-64 bg-white shadow-md">
-      <nav class="mt-5">
-        <router-link to="/CreaPost" class="block py-2 px-4 text-gray-700 hover:bg-gray-200">Crea Post</router-link>
-        <router-link to="/CreaImmagine" class="block py-2 px-4 text-gray-700 hover:bg-gray-200">Crea Immagine</router-link>
-        <router-link to="/CreaCommento" class="block py-2 px-4 text-gray-700 hover:bg-gray-200">Crea Commento</router-link>
-        <router-link to="/Config" class="block py-2 px-4 text-gray-700 hover:bg-gray-200">Configurazione</router-link>
-        <a @click="logout" class="block py-2 px-4 text-gray-700 hover:bg-gray-200 cursor-pointer">Logout</a>
-      </nav>
-    </aside>
+  <div class="flex flex-col h-screen bg-gray-100">
+    <!-- Header per schermi piccoli -->
+    <header class="md:hidden bg-white shadow-md p-4">
+      <button @click="toggleMenu" class="text-gray-700">
+        ☰
+      </button>
+    </header>
 
-    <!-- Contenuto principale -->
-    <main class="flex-1 p-10 overflow-y-auto">
-      <h1 class="text-2xl font-bold mb-5">Crea Post</h1>
-      <div class="space-y-4">
+    <div class="flex flex-1 overflow-hidden">
+      <!-- Aside component -->
+      <Aside 
+        :isOpen="isMenuOpen" 
+        @toggle="toggleMenu"
+        class="flex-shrink-0 h-full overflow-y-auto"
+      />
+
+      <!-- Contenuto principale -->
+      <main class="flex-1 p-4 md:p-10 overflow-y-auto">
+        <h1 class="text-2xl font-bold mb-5">Crea Post</h1>
+        <div class="space-y-4">
         <div>
           <label class="block text-sm font-medium text-gray-700">URL</label>
           <input v-model="url" type="text" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2">
@@ -35,16 +39,22 @@
           {{ isGenerating ? 'Generazione in corso...' : 'Genera Post' }}
         </button>
       </div>
-    </main>
+      </main>
+    </div>
   </div>
 </template>
 
 <script>
+import Aside from './Aside.vue';
 import axios from 'axios';
 
 export default {
+  components: {
+    Aside
+  },
   data() {
     return {
+      isMenuOpen: false,
       url: '',
       contenutoAlternativo: '',
       prompt: `# Generatore di Post per LinkedIn
@@ -124,7 +134,39 @@ Ecco l'<ARTICOLO>:`,
     logout() {
       localStorage.removeItem('chatgptKey');
       this.$router.push('/config');
+    },
+    toggleMenu() {
+      this.isMenuOpen = !this.isMenuOpen;
+    },
+    closeMenu() {
+      this.isMenuOpen = false;
     }
+  },  
+  mounted() {
+    // Set isMenuOpen to true on larger screens
+    const mediaQuery = window.matchMedia('(min-width: 768px)');
+    this.isMenuOpen = mediaQuery.matches;
+
+    // Listen for changes in screen size
+    mediaQuery.addListener((e) => {
+      this.isMenuOpen = e.matches;
+    });
+  },
+  beforeUnmount() {
+    // Clean up the listener when the component is destroyed
+    window.matchMedia('(min-width: 768px)').removeListener(this.handleResize);
   }
 }
 </script>
+
+<style scoped>
+@media (max-width: 767px) {
+  .flex-col {
+    display: block;
+  }
+  
+  .flex-1 {
+    height: calc(100vh - 56px); /* Altezza dello schermo meno l'altezza dell'header */
+  }
+}
+</style>
