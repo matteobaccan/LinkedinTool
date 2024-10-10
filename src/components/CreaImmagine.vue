@@ -84,7 +84,7 @@ Se possibile, rendila meno "asettica" e più "personale". prediligi la realistic
         const response = await axios.post('https://api.openai.com/v1/images/generations', {
           prompt: promptParameter,
           n: 1,
-          size: "1024x1024",
+          size: "1792x1024",
           model: "dall-e-3",
           quality: "hd"
         }, {
