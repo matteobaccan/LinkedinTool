@@ -63,8 +63,8 @@ Se possibile, rendila meno "asettica" e più "personale". prediligi la realistic
     ...shared.methods,
     async generaImmagine() {
       const chatgptKey = localStorage.getItem('chatgptKey')
-      if (!chatgptKey || (!this.url && !this.contenutoAlternativo) || !this.prompt) {
-        alert('Per favore, assicurati di aver configurato la chiave API e fornisci un URL o il contenuto della pagina.');
+      if (!chatgptKey) {
+        alert('Per favore, assicurati di aver configurato la chiave API');
         return;
       }
 
