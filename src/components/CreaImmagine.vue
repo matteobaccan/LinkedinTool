@@ -44,16 +44,14 @@
 </template>
 
 <script>
-import Aside from './Aside.vue';
+import shared from "./shared.js";
 import axios from 'axios';
 
 export default {
-  components: {
-    Aside
-  },
+  ...shared,
   data() {
     return {
-      isMenuOpen: false,
+      ...shared.data(),
       post: '',
       prompt: `Crea una immagine corporate, in formato 16:9, per questo articolo.
 Se possibile, rendila meno "asettica" e più "personale". prediligi la realisticità alla spettacolarità. `,
@@ -62,6 +60,7 @@ Se possibile, rendila meno "asettica" e più "personale". prediligi la realistic
     }
   },
   methods: {
+    ...shared.methods,
     async generaImmagine() {
       const chatgptKey = localStorage.getItem('chatgptKey')
       if (!chatgptKey || (!this.url && !this.contenutoAlternativo) || !this.prompt) {
@@ -95,33 +94,9 @@ Se possibile, rendila meno "asettica" e più "personale". prediligi la realistic
       } finally {
         this.isGenerating = false;
       }
-    },
-    logout() {
-      localStorage.removeItem('chatgptKey');
-      this.$router.push('/');
-    },
-    toggleMenu() {
-      this.isMenuOpen = !this.isMenuOpen;
-    },
-    closeMenu() {
-      this.isMenuOpen = false;
     }
-  },
-  mounted() {
-    // Set isMenuOpen to true on larger screens
-    const mediaQuery = window.matchMedia('(min-width: 768px)');
-    this.isMenuOpen = mediaQuery.matches;
-
-    // Listen for changes in screen size
-    mediaQuery.addListener((e) => {
-      this.isMenuOpen = e.matches;
-    });
-  },
-  beforeUnmount() {
-    // Clean up the listener when the component is destroyed
-    window.matchMedia('(min-width: 768px)').removeListener(this.handleResize);
   }
-}
+};
 </script>
 
 <style scoped>

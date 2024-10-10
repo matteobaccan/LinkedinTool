@@ -46,16 +46,14 @@
 </template>
 
 <script>
-import Aside from './Aside.vue';
+import shared from "./shared.js";
 import axios from 'axios';
 
 export default {
-  components: {
-    Aside
-  },
+  ...shared,
   data() {
     return {
-      isMenuOpen: false,
+      ...shared.data(),
       url: '',
       contenutoAlternativo: '',
       prompt: `# Generatore di Post per LinkedIn
@@ -85,6 +83,7 @@ Ecco l'<ARTICOLO>:`,
     }
   },
   methods: {
+    ...shared.methods,
     async generaPost() {
       const chatgptKey = localStorage.getItem('chatgptKey')
       if (!chatgptKey || (!this.url && !this.contenutoAlternativo) || !this.prompt) {
@@ -131,29 +130,9 @@ Ecco l'<ARTICOLO>:`,
       } finally {
         this.isGenerating = false;
       }
-    },
-    toggleMenu() {
-      this.isMenuOpen = !this.isMenuOpen;
-    },
-    closeMenu() {
-      this.isMenuOpen = false;
     }
-  },
-  mounted() {
-    // Set isMenuOpen to true on larger screens
-    const mediaQuery = window.matchMedia('(min-width: 768px)');
-    this.isMenuOpen = mediaQuery.matches;
-
-    // Listen for changes in screen size
-    mediaQuery.addListener((e) => {
-      this.isMenuOpen = e.matches;
-    });
-  },
-  beforeUnmount() {
-    // Clean up the listener when the component is destroyed
-    window.matchMedia('(min-width: 768px)').removeListener(this.handleResize);
   }
-}
+};
 </script>
 
 <style scoped>
