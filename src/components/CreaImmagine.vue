@@ -75,9 +75,14 @@ Se possibile, rendila meno "asettica" e più "personale". prediligi la realistic
 
       this.isGenerating = true;
 
+      let promptParameter = `${this.prompt}\n\nArticolo: ${this.post}`
+      if( promptParameter.length > 1000 ) {
+        promptParameter = promptParameter.substring(0, 1000);
+      }
+
       try {
         const response = await axios.post('https://api.openai.com/v1/images/generations', {
-          prompt: `${this.prompt}\n\nArticolo: ${this.post}`,
+          prompt: promptParameter,
           n: 1,
           size: "1024x1024"
         }, {
