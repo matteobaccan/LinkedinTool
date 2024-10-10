@@ -40,6 +40,7 @@
         </div>
       </main>
     </div>
+    <Footer/>
   </div>
 </template>
 
@@ -106,6 +107,7 @@ Se possibile, rendila meno "asettica" e più "personale". prediligi la realistic
 };
 </script>
 
+
 <style scoped>
 @media (max-width: 767px) {
   .flex-col {
@@ -113,8 +115,12 @@ Se possibile, rendila meno "asettica" e più "personale". prediligi la realistic
   }
 
   .flex-1 {
-    height: calc(100vh - 56px);
+    height: calc(100vh - 112px);
     /* Altezza dello schermo meno l'altezza dell'header */
+  }
+
+  .flex-2 {
+    height: 56px;
   }
 }
 </style>

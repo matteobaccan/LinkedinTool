@@ -1,9 +1,11 @@
 
 import Aside from './Aside.vue';
+import Footer from './Footer.vue';
 
 export default {
     components: {
-        Aside
+        Aside,
+        Footer
     },
     data() {
         return {

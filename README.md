@@ -29,6 +29,8 @@ Una serie di tool che utilizzo per migliorare i miei post e commenti su LinkedIn
 
 ## Cosa ho aggiunto?
 
+Come esercizio di stile ho creato un frontend VUE.
+
 ## Dove posso trovare il progetto?
 
 <https://ai4li.netlify.app/>

@@ -42,6 +42,7 @@
         </div>
       </main>
     </div>
+    <Footer/>
   </div>
 </template>
 
@@ -135,6 +136,7 @@ Ecco l'<ARTICOLO>:`,
 };
 </script>
 
+
 <style scoped>
 @media (max-width: 767px) {
   .flex-col {
@@ -142,8 +144,12 @@ Ecco l'<ARTICOLO>:`,
   }
 
   .flex-1 {
-    height: calc(100vh - 56px);
+    height: calc(100vh - 112px);
     /* Altezza dello schermo meno l'altezza dell'header */
+  }
+
+  .flex-2 {
+    height: 56px;
   }
 }
 </style>
