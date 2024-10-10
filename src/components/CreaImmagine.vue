@@ -1,53 +1,59 @@
 <template>
-  <div class="flex h-screen bg-gray-100">
-    <!-- Menu laterale -->
-    <aside class="w-64 bg-white shadow-md">
-      <nav class="mt-5">
-        <router-link to="/CreaPost" class="block py-2 px-4 text-gray-700 hover:bg-gray-200">Crea Post</router-link>
-        <router-link to="/CreaImmagine" class="block py-2 px-4 text-gray-700 hover:bg-gray-200">Crea Immagine</router-link>
-        <router-link to="/CreaCommento" class="block py-2 px-4 text-gray-700 hover:bg-gray-200">Crea Commento</router-link>
-        <router-link to="/Config" class="block py-2 px-4 text-gray-700 hover:bg-gray-200">Configurazione</router-link>
-        <a @click="logout" class="block py-2 px-4 text-gray-700 hover:bg-gray-200 cursor-pointer">Logout</a>
-      </nav>
-    </aside>
-    <!-- Contenuto principale -->
-    <main class="flex-1 p-10 overflow-y-auto">
-      <h1 class="text-2xl font-bold mb-5">Crea Immagine</h1>
-      <div class="space-y-4">
-        <div>
-          <label class="block text-sm font-medium text-gray-700">ChatGPT Key</label>
-          <input v-model="chatgptKey" type="password" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2">
-        </div>
-        <div>
-          <label class="block text-sm font-medium text-gray-700">Post</label>
-          <textarea v-model="post" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2" rows="4"></textarea>
-        </div>
-        <div>
-          <label class="block text-sm font-medium text-gray-700">Prompt</label>
-          <textarea v-model="prompt" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2" rows="4"></textarea>
-        </div>
-        <div>
-          <label class="block text-sm font-medium text-gray-700">Risultato</label>
-          <div v-if="risultato" class="mt-1 border border-gray-300 rounded-md p-2">
-            <img :src="risultato" alt="Immagine generata" class="max-w-full h-auto">
+  <div class="flex flex-col h-screen bg-gray-100">
+    <!-- Header per schermi piccoli -->
+    <header class="md:hidden bg-white shadow-md p-4">
+      <button @click="toggleMenu" class="text-gray-700">
+        ☰
+      </button>
+    </header>
+
+    <div class="flex flex-1 overflow-hidden">
+      <!-- Aside component -->
+      <Aside :isOpen="isMenuOpen" @toggle="toggleMenu" class="flex-shrink-0 h-full overflow-y-auto" />
+
+      <!-- Contenuto principale -->
+      <main class="flex-1 p-4 md:p-10 overflow-y-auto">
+        <h1 class="text-2xl font-bold mb-5">Crea Immagine</h1>
+        <div class="space-y-4">
+          <div>
+            <label class="block text-sm font-medium text-gray-700">Post</label>
+            <textarea v-model="post" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2"
+              rows="4"></textarea>
           </div>
-          <p v-else class="mt-1 text-gray-500">Nessuna immagine generata</p>
+          <div>
+            <label class="block text-sm font-medium text-gray-700">Prompt</label>
+            <textarea v-model="prompt" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2"
+              rows="4"></textarea>
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700">Risultato</label>
+            <div v-if="risultato" class="mt-1 border border-gray-300 rounded-md p-2">
+              <img :src="risultato" alt="Immagine generata" class="max-w-full h-auto">
+            </div>
+            <p v-else class="mt-1 text-gray-500">Nessuna immagine generata</p>
+          </div>
+          <button @click="generaImmagine"
+            class="px-4 py-2 bg-green-500 text-white rounded-md hover:bg-green-600 disabled:bg-green-300"
+            :disabled="isGenerating">
+            {{ isGenerating ? 'Generazione in corso...' : 'Genera Immagine' }}
+          </button>
         </div>
-        <button @click="generaImmagine" class="px-4 py-2 bg-green-500 text-white rounded-md hover:bg-green-600 disabled:bg-green-300" :disabled="isGenerating">
-          {{ isGenerating ? 'Generazione in corso...' : 'Genera Immagine' }}
-        </button>
-      </div>
-    </main>
+      </main>
+    </div>
   </div>
 </template>
 
 <script>
+import Aside from './Aside.vue';
 import axios from 'axios';
 
 export default {
+  components: {
+    Aside
+  },
   data() {
     return {
-      chatgptKey: '',
+      isMenuOpen: false,
       post: '',
       prompt: `Crea una immagine corporate, in formato 16:9, per questo articolo.
 Se possibile, rendila meno "asettica" e più "personale". prediligi la realisticità alla spettacolarità. `,
@@ -57,7 +63,13 @@ Se possibile, rendila meno "asettica" e più "personale". prediligi la realistic
   },
   methods: {
     async generaImmagine() {
-      if (!this.chatgptKey || !this.post || !this.prompt) {
+      const chatgptKey = localStorage.getItem('chatgptKey')
+      if (!chatgptKey || (!this.url && !this.contenutoAlternativo) || !this.prompt) {
+        alert('Per favore, assicurati di aver configurato la chiave API e fornisci un URL o il contenuto della pagina.');
+        return;
+      }
+
+      if (!this.post || !this.prompt) {
         alert('Per favore, compila tutti i campi.');
         return;
       }
@@ -71,7 +83,7 @@ Se possibile, rendila meno "asettica" e più "personale". prediligi la realistic
           size: "1024x1024"
         }, {
           headers: {
-            'Authorization': `Bearer ${this.chatgptKey}`,
+            'Authorization': `Bearer ${chatgptKey}`,
             'Content-Type': 'application/json'
           }
         });
@@ -85,12 +97,42 @@ Se possibile, rendila meno "asettica" e più "personale". prediligi la realistic
       }
     },
     logout() {
-      // Implementa qui la logica per il logout
-      console.log('Logout');
-      // Esempio: rimuovi il token di autenticazione dallo storage e reindirizza alla pagina di login
-      localStorage.removeItem('authToken');
-      this.$router.push('/login');
+      localStorage.removeItem('chatgptKey');
+      this.$router.push('/');
+    },
+    toggleMenu() {
+      this.isMenuOpen = !this.isMenuOpen;
+    },
+    closeMenu() {
+      this.isMenuOpen = false;
     }
+  },
+  mounted() {
+    // Set isMenuOpen to true on larger screens
+    const mediaQuery = window.matchMedia('(min-width: 768px)');
+    this.isMenuOpen = mediaQuery.matches;
+
+    // Listen for changes in screen size
+    mediaQuery.addListener((e) => {
+      this.isMenuOpen = e.matches;
+    });
+  },
+  beforeUnmount() {
+    // Clean up the listener when the component is destroyed
+    window.matchMedia('(min-width: 768px)').removeListener(this.handleResize);
   }
 }
 </script>
+
+<style scoped>
+@media (max-width: 767px) {
+  .flex-col {
+    display: block;
+  }
+
+  .flex-1 {
+    height: calc(100vh - 56px);
+    /* Altezza dello schermo meno l'altezza dell'header */
+  }
+}
+</style>

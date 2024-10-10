@@ -9,36 +9,37 @@
 
     <div class="flex flex-1 overflow-hidden">
       <!-- Aside component -->
-      <Aside 
-        :isOpen="isMenuOpen" 
-        @toggle="toggleMenu"
-        class="flex-shrink-0 h-full overflow-y-auto"
-      />
+      <Aside :isOpen="isMenuOpen" @toggle="toggleMenu" class="flex-shrink-0 h-full overflow-y-auto" />
 
       <!-- Contenuto principale -->
       <main class="flex-1 p-4 md:p-10 overflow-y-auto">
         <h1 class="text-2xl font-bold mb-5">Crea Post</h1>
         <div class="space-y-4">
-        <div>
-          <label class="block text-sm font-medium text-gray-700">URL</label>
-          <input v-model="url" type="text" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2">
+          <div>
+            <label class="block text-sm font-medium text-gray-700">URL</label>
+            <input v-model="url" type="text" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2">
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700">O in alternativa il contenuto della pagina</label>
+            <textarea v-model="contenutoAlternativo" rows="5"
+              class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2"></textarea>
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700">Prompt</label>
+            <textarea v-model="prompt" rows="10"
+              class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2"></textarea>
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700">Risultato</label>
+            <textarea v-model="risultato" rows="10" readonly
+              class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm bg-gray-50 p-2"></textarea>
+          </div>
+          <button @click="generaPost"
+            class="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 disabled:bg-blue-300"
+            :disabled="isGenerating">
+            {{ isGenerating ? 'Generazione in corso...' : 'Genera Post' }}
+          </button>
         </div>
-        <div>
-          <label class="block text-sm font-medium text-gray-700">O in alternativa il contenuto della pagina</label>
-          <textarea v-model="contenutoAlternativo" rows="5" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2"></textarea>
-        </div>
-        <div>
-          <label class="block text-sm font-medium text-gray-700">Prompt</label>
-          <textarea v-model="prompt" rows="10" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2"></textarea>
-        </div>
-        <div>
-          <label class="block text-sm font-medium text-gray-700">Risultato</label>
-          <textarea v-model="risultato" rows="10" readonly class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm bg-gray-50 p-2"></textarea>
-        </div>
-        <button @click="generaPost" class="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 disabled:bg-blue-300" :disabled="isGenerating">
-          {{ isGenerating ? 'Generazione in corso...' : 'Genera Post' }}
-        </button>
-      </div>
       </main>
     </div>
   </div>
@@ -102,7 +103,7 @@ Ecco l'<ARTICOLO>:`,
         } else {
           articleContent = this.contenutoAlternativo;
         }
-        articleContent = this.prompt +articleContent;
+        articleContent = this.prompt + articleContent;
 
         const response = await axios.post('https://api.openai.com/v1/chat/completions', {
           model: "gpt-3.5-turbo",
@@ -131,17 +132,13 @@ Ecco l'<ARTICOLO>:`,
         this.isGenerating = false;
       }
     },
-    logout() {
-      localStorage.removeItem('chatgptKey');
-      this.$router.push('/config');
-    },
     toggleMenu() {
       this.isMenuOpen = !this.isMenuOpen;
     },
     closeMenu() {
       this.isMenuOpen = false;
     }
-  },  
+  },
   mounted() {
     // Set isMenuOpen to true on larger screens
     const mediaQuery = window.matchMedia('(min-width: 768px)');
@@ -164,9 +161,10 @@ Ecco l'<ARTICOLO>:`,
   .flex-col {
     display: block;
   }
-  
+
   .flex-1 {
-    height: calc(100vh - 56px); /* Altezza dello schermo meno l'altezza dell'header */
+    height: calc(100vh - 56px);
+    /* Altezza dello schermo meno l'altezza dell'header */
   }
 }
 </style>
