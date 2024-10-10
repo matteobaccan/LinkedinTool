@@ -45,7 +45,7 @@
 import shared from "./shared.js";
 import axios from 'axios';
 
-export default{
+export default {
   ...shared,
   data() {
     return {
@@ -86,7 +86,7 @@ Ecco il <POST> da commentare:`,
         let articleContent = this.prompt + this.post;
 
         const response = await axios.post('https://api.openai.com/v1/chat/completions', {
-          model: "gpt-3.5-turbo",
+          model: "gpt-4o",
           messages: [
             {
               role: "user",
