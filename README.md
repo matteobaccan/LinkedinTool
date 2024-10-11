@@ -19,6 +19,12 @@ npm install -D tailwindcss@latest postcss@latest autoprefixer@latest
 npm run dev
 ```
 
+## Per generare il progetto
+
+```bash
+npm run build
+```
+
 ## Cosa contiene questo progetto
 
 Una serie di tool che utilizzo per migliorare i miei post e commenti su LinkedIn.
