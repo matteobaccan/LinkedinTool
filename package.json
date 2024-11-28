@@ -19,7 +19,7 @@
     "autoprefixer": "^10.4.20",
     "postcss": "^8.4.47",
     "tailwindcss": "^3.4.13",
-    "vite": "^5.4.8"
+    "vite": "^6.0.0"
   },
   "description": "npm init -y\r npm install vue@latest vue-router@latest\r npm install --save-dev vite @vitejs/plugin-vue",
   "main": "vite.config.js",
