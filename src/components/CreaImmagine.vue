@@ -86,9 +86,8 @@ Se possibile, rendila meno "asettica" e più "personale". prediligi la realistic
           prompt: promptParameter,
           n: 1,
           size: "1536x1024",
-          model: "gpt-image-1",
-          quality: "medium",
-          output_format: "webp"
+          model: "dall-e-3",
+          quality: "medium"
         }, {
           headers: {
             'Authorization': `Bearer ${chatgptKey}`,
