@@ -87,7 +87,7 @@ Se possibile, rendila meno "asettica" e più "personale". prediligi la realistic
           n: 1,
           size: "1792x1024",
           model: "dall-e-3",
-          quality: "auto"
+          quality: "hd"
         }, {
           headers: {
             'Authorization': `Bearer ${chatgptKey}`,
