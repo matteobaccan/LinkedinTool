@@ -12,6 +12,7 @@ npm install vue@latest vue-router@latest
 npm install --save-dev vite @vitejs/plugin-vue
 npm install -D tailwindcss@latest postcss@latest autoprefixer@latest
 npm install -D @tailwindcss/postcss
+npm i -d @tailwindcss/vite
 ```
 
 ## Per testare il progetto lancio
