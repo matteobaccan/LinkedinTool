@@ -88,7 +88,7 @@ Se possibile, rendila meno "asettica" e più "personale". prediligi la realistic
           size: "1536x1024",
           model: "gpt-image-1",
           quality: "medium",
-          format: "webp"
+          output_format: "webp"
         }, {
           headers: {
             'Authorization': `Bearer ${chatgptKey}`,
