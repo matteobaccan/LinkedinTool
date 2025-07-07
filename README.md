@@ -2,8 +2,8 @@
 
 [![Netlify Status](https://api.netlify.com/api/v1/badges/c4b10787-f2f9-42aa-9864-82a1cca79ffd/deploy-status)](https://app.netlify.com/sites/ai4li/deploys)
 [![Project Version](https://img.shields.io/badge/version-0.0.0-blue.svg)](package.json)
-[![License: ISC](https://img.shields.io/badge/License-ISC-blue.svg)](LICENSE)
-<!-- Nota: Ricorda di aggiornare [year] e [fullname] nel file LICENSE -->
+[![License: GPL v3](https://img.shields.io/badge/License-GPL%20v3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
+<!-- Nota: Il file LICENSE nel repository contiene il testo completo della GPL v3. -->
 
 **LinkedIn Power Tools** è un'applicazione web progettata per potenziare la tua presenza su LinkedIn. Sfruttando la potenza dell'intelligenza artificiale di OpenAI (GPT-4o e DALL-E 3), questa suite di strumenti ti aiuta a creare post coinvolgenti, commenti pertinenti e immagini accattivanti in modo rapido ed efficiente.
 
@@ -157,9 +157,9 @@ I contributi sono benvenuti! Se hai idee per migliorare l'applicazione, corregge
 
 ## Licenza
 
-Questo progetto è rilasciato sotto la **Licenza ISC**, come specificato nel `package.json`.
-Si consiglia di aggiungere un file `LICENSE` al repository con il testo completo della licenza ISC.
-Puoi trovare il testo della licenza ISC su [https://opensource.org/licenses/ISC](https://opensource.org/licenses/ISC).
+Questo progetto è rilasciato sotto la **GNU General Public License v3.0 (GPL-3.0-or-later)**, come specificato nel `package.json`.
+Il testo completo della licenza è disponibile nel file `LICENSE` all'interno di questo repository.
+Puoi anche visualizzare la licenza online su [gnu.org/licenses/gpl-3.0.html](https://www.gnu.org/licenses/gpl-3.0.html).
 
 ## 🙏 Ringraziamenti
 
