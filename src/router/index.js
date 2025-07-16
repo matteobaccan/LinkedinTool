@@ -1,15 +1,15 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import Login from '../components/Login.vue'
-import CreaPost from '../components/CreaPost.vue'
-import CreaCommento from '../components/CreaCommento.vue'
-import CreaImmagine from '../components/CreaImmagine.vue'
+import CreatePost from '../components/CreatePost.vue'
+import CreateImage from '../components/CreateImage.vue'
+import CreateComment from '../components/CreateComment.vue'
 import Config from '../components/Config.vue'
 
 const routes = [
   { path: '/', component: Login },
-  { path: '/CreaPost', component: CreaPost, meta: { requiresAuth: true } },
-  { path: '/CreaCommento', component: CreaCommento, meta: { requiresAuth: true } },
-  { path: '/CreaImmagine', component: CreaImmagine, meta: { requiresAuth: true } },
+  { path: '/CreatePost', component: CreatePost, meta: { requiresAuth: true } },
+  { path: '/CreateComment', component: CreateComment, meta: { requiresAuth: true } },
+  { path: '/CreateImage', component: CreateImage, meta: { requiresAuth: true } },
   { path: '/Config', component: Config, meta: { requiresAuth: true } }
 ]
 

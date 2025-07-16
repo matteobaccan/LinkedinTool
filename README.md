@@ -3,167 +3,167 @@
 [![Netlify Status](https://api.netlify.com/api/v1/badges/c4b10787-f2f9-42aa-9864-82a1cca79ffd/deploy-status)](https://app.netlify.com/sites/ai4li/deploys)
 [![Project Version](https://img.shields.io/badge/version-0.0.0-blue.svg)](package.json)
 [![License: GPL v3](https://img.shields.io/badge/License-GPL%20v3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
-<!-- Nota: Il file LICENSE nel repository contiene il testo completo della GPL v3. -->
+<!-- Note: The LICENSE file in the repository contains the full text of GPL v3. -->
 
-**LinkedIn Power Tools** è un'applicazione web progettata per potenziare la tua presenza su LinkedIn. Sfruttando la potenza dell'intelligenza artificiale di OpenAI (GPT-4o e DALL-E 3), questa suite di strumenti ti aiuta a creare post coinvolgenti, commenti pertinenti e immagini accattivanti in modo rapido ed efficiente.
+**LinkedIn Power Tools** is a web application designed to enhance your presence on LinkedIn. By leveraging the power of OpenAI's artificial intelligence (GPT-4o and DALL-E 3), this suite of tools helps you create engaging posts, relevant comments, and captivating images quickly and efficiently.
 
-🚀 L'applicazione è accessibile online: **[ai4li.netlify.app](https://ai4li.netlify.app/)**
+🚀 The application is accessible online: **[ai4li.netlify.app](https://ai4li.netlify.app/)**
 
-## 📚 Indice
+## 📚 Table of Contents
 
-- [Introduzione](#introduzione)
-- [Funzionalità Principali](#funzionalità-principali)
-  - [Crea Post](#crea-post)
-  - [Crea Commento](#crea-commento)
-  - [Crea Immagine](#crea-immagine)
-- [Come Iniziare](#come-iniziare)
-  - [Prerequisiti](#prerequisiti)
-  - [Configurazione](#configurazione)
-  - [Utilizzo degli Strumenti](#utilizzo-degli-strumenti)
-- [Sviluppo Locale](#sviluppo-locale)
-  - [Installazione delle Dipendenze](#installazione-delle-dipendenze)
-  - [Avviare il Server di Sviluppo](#avviare-il-server-di-sviluppo)
-  - [Build per il Deploy](#build-per-il-deploy)
-- [Tecnologie Utilizzate](#tecnologie-utilizzate)
-- [Origine del Progetto](#origine-del-progetto)
-- [Contributi](#contributi)
-- [Licenza](#licenza)
-- [Ringraziamenti](#ringraziamenti)
+- [Introduction](#introduction)
+- [Main Features](#main-features)
+  - [Create Post](#create-post)
+  - [Create Comment](#create-comment)
+  - [Create Image](#create-image)
+- [Getting Started](#getting-started)
+  - [Prerequisites](#prerequisites)
+  - [Configuration](#configuration)
+  - [Using the Tools](#using-the-tools)
+- [Local Development](#local-development)
+  - [Installing Dependencies](#installing-dependencies)
+  - [Starting the Development Server](#starting-the-development-server)
+  - [Build for Deployment](#build-for-deployment)
+- [Technologies Used](#technologies-used)
+- [Project Origin](#project-origin)
+- [Contributions](#contributions)
+- [License](#license)
+- [Acknowledgments](#acknowledgments)
 
-## ✨ Introduzione
+## ✨ Introduction
 
-**LinkedIn Power Tools** è un'applicazione web progettata per potenziare la tua presenza su LinkedIn. Sfruttando la potenza dell'intelligenza artificiale di OpenAI (GPT-4o e DALL-E 3), questa suite di strumenti ti aiuta a creare post coinvolgenti, commenti pertinenti e immagini accattivanti in modo rapido ed efficiente.
+**LinkedIn Power Tools** is a web application designed to enhance your presence on LinkedIn. By leveraging the power of OpenAI's artificial intelligence (GPT-4o and DALL-E 3), this suite of tools helps you create engaging posts, relevant comments, and captivating images quickly and efficiently.
 
-LinkedIn è una piattaforma cruciale per il networking professionale e la condivisione di contenuti di valore. Tuttavia, la creazione costante di post originali, commenti intelligenti e immagini di supporto può richiedere molto tempo ed energia. **LinkedIn Power Tools** nasce per semplificare questo processo, offrendo un assistente AI per:
+LinkedIn is a crucial platform for professional networking and sharing valuable content. However, constantly creating original posts, insightful comments, and supporting images can be time-consuming and energy-draining. **LinkedIn Power Tools** was created to simplify this process, offering an AI assistant to:
 
-- Generare bozze di post basate su articoli o idee.
-- Creare commenti contestualizzati e stimolanti per post altrui.
-- Produrre immagini corporate e personalizzate per arricchire i tuoi contenuti.
+- Generate post drafts based on articles or ideas.
+- Create contextual and thought-provoking comments for others' posts.
+- Produce corporate and personalized images to enrich your content.
 
-## 🛠️ Funzionalità Principali
+## 🛠️ Main Features
 
-L'applicazione offre tre strumenti principali:
+The application offers three main tools:
 
-### Crea Post
+### Create Post
 
-Questo strumento ti permette di generare post per LinkedIn partendo da un URL di un articolo o da un testo da te fornito.
-- **Input**: URL di un articolo o testo personalizzato.
+This tool allows you to generate LinkedIn posts from a URL of an article or from text you provide.
+- **Input**: URL of an article or custom text.
 - **AI Model**: GPT-4o.
-- **Output**: Un testo per un post LinkedIn, ottimizzato per catturare l'attenzione, riassumere contenuti, stimolare la discussione e seguire le best practice della piattaforma.
-- **Personalizzazione**: Puoi modificare il prompt di base per adattare il tono, lo stile e gli obiettivi specifici del post.
+- **Output**: A text for a LinkedIn post, optimized to capture attention, summarize content, stimulate discussion, and follow platform best practices.
+- **Customization**: You can modify the basic prompt to adapt the tone, style, and specific goals of the post.
 
-### Crea Commento
+### Create Comment
 
-Ideale per interagire in modo significativo con la tua rete.
-- **Input**: Il testo del post di LinkedIn a cui desideri commentare.
+Ideal for interacting meaningfully with your network.
+- **Input**: The text of the LinkedIn post you want to comment on.
 - **AI Model**: GPT-4o.
-- **Output**: Un commento pertinente, positivo e costruttivo, pensato per incoraggiare ulteriori interazioni.
-- **Personalizzazione**: Il prompt è configurabile per affinare il tipo di commento generato (massimo 1000 battute).
+- **Output**: A relevant, positive, and constructive comment, designed to encourage further interaction.
+- **Customization**: The prompt is configurable to refine the type of comment generated (maximum 1000 characters).
 
-### Crea Immagine
+### Create Image
 
-Aggiungi un tocco visivo professionale ai tuoi post.
-- **Input**: Una descrizione testuale (massimo 1000 caratteri) per l'immagine desiderata.
+Add a professional visual touch to your posts.
+- **Input**: A text description (maximum 1000 characters) for the desired image.
 - **AI Model**: DALL-E 3.
-- **Output**: Un'immagine in formato 16:9, con uno stile corporate ma personalizzato, pronta per essere allegata ai tuoi post.
-- **Personalizzazione**: Modifica il prompt per influenzare lo stile e il contenuto dell'immagine.
+- **Output**: An image in 16:9 format, with a corporate yet personalized style, ready to be attached to your posts.
+- **Customization**: Modify the prompt to influence the style and content of the image.
 
-## 🚀 Come Iniziare
+## 🚀 Getting Started
 
-Per utilizzare LinkedIn Power Tools, segui questi semplici passaggi:
+To use LinkedIn Power Tools, follow these simple steps:
 
-### Prerequisiti
+### Prerequisites
 
-- Un account OpenAI.
-- Una chiave API OpenAI. Puoi ottenerla dal tuo pannello di controllo OpenAI.
+- An OpenAI account.
+- An OpenAI API key. You can get it from your OpenAI dashboard.
 
-### Configurazione
+### Configuration
 
-1.  Visita [ai4li.netlify.app](https://ai4li.netlify.app/).
-2.  L'applicazione ti reindirizzerà alla pagina di Login. Attualmente, il login è un passaggio formale; l'autenticazione vera e propria per le funzionalità AI avviene tramite la chiave API.
-3.  Una volta "loggato", naviga alla sezione **"Config"** (accessibile dal menu laterale).
-4.  Inserisci la tua **chiave API OpenAI** nell'apposito campo e salvala. La chiave verrà memorizzata localmente nel tuo browser.
+1.  Visit [ai4li.netlify.app](https://ai4li.netlify.app/).
+2.  The application will redirect you to the Login page. Currently, login is a formal step; actual authentication for AI features is done via the API key.
+3.  Once "logged in," navigate to the **"Config"** section (accessible from the side menu).
+4.  Enter your **OpenAI API key** in the appropriate field and save it. The key will be stored locally in your browser.
 
-### Utilizzo degli Strumenti
+### Using the Tools
 
-Dopo aver configurato la tua chiave API:
+After configuring your API key:
 
-1.  Seleziona lo strumento desiderato dal menu laterale: "Crea Post", "Crea Commento" o "Crea Immagine".
-2.  Fornisci l'input richiesto (URL, testo del post, descrizione per l'immagine).
-3.  (Opzionale) Rivedi e adatta il prompt precompilato per personalizzare l'output dell'AI.
-4.  Clicca sul pulsante "Genera..." e attendi il risultato.
+1.  Select the desired tool from the side menu: "Create Post," "Create Comment," or "Create Image."
+2.  Provide the required input (URL, post text, image description).
+3.  (Optional) Review and adapt the pre-filled prompt to customize the AI's output.
+4.  Click the "Generate..." button and wait for the result.
 
-## 💻 Sviluppo Locale
+## 💻 Local Development
 
-Se desideri eseguire il progetto localmente o contribuire al suo sviluppo:
+If you want to run the project locally or contribute to its development:
 
-### Installazione delle Dipendenze
+### Installing Dependencies
 
-Il progetto è stato inizializzato con Vite e utilizza npm come package manager.
+The project was initialized with Vite and uses npm as a package manager.
 
 ```bash
-# Clona il repository (se non l'hai già fatto)
-# git clone <URL_DEL_REPOSITORY>
-# cd <NOME_DELLA_CARTELLA_DEL_PROGETTO>
+# Clone the repository (if you haven't already)
+# git clone <REPOSITORY_URL>
+# cd <PROJECT_FOLDER_NAME>
 
 npm install
 ```
 
-La sezione seguente elenca i comandi utilizzati originariamente per l'impostazione del progetto. Normalmente, l'esecuzione di `npm install` nel terminale, dopo aver clonato il repository, dovrebbe essere sufficiente per installare tutte le dipendenze necessarie elencate nel file `package.json`.
+The following section lists the commands originally used for setting up the project. Normally, running `npm install` in the terminal after cloning the repository should be sufficient to install all the necessary dependencies listed in the `package.json` file.
 
 ```bash
-# Comandi originali per la creazione del progetto (informativo)
+# Original commands for project creation (for informational purposes)
 # npm init -y
 # npm install vue@latest vue-router@latest
 # npm install --save-dev vite @vitejs/plugin-vue
 # npm install -D tailwindcss@latest postcss@latest autoprefixer@latest
-# npm install -D @tailwindcss/postcss # Nota: potrebbe essere obsoleto o integrato in tailwindcss/postcss7-compat
-# npm i -d @tailwindcss/vite # Nota: verificare la necessità e correttezza di questo comando specifico per versioni recenti
+# npm install -D @tailwindcss/postcss # Note: may be obsolete or integrated into tailwindcss/postcss7-compat
+# npm i -d @tailwindcss/vite # Note: verify the necessity and correctness of this specific command for recent versions
 ```
 
-### Avviare il Server di Sviluppo
+### Starting the Development Server
 
 ```bash
 npm run dev
 ```
-Questo avvierà l'applicazione in modalità sviluppo, solitamente accessibile su `http://localhost:5173`.
+This will start the application in development mode, usually accessible at `http://localhost:5173`.
 
-### Build per il Deploy
+### Build for Deployment
 
 ```bash
 npm run build
 ```
-Questo comando genererà i file statici pronti per il deploy nella cartella `dist/`.
+This command will generate the static files ready for deployment in the `dist/` folder.
 
-## ⚙️ Tecnologie Utilizzate
+## ⚙️ Technologies Used
 
-- **Vue.js 3**: Framework JavaScript progressivo per la costruzione di interfacce utente.
-- **Vite**: Build tool moderno e veloce per progetti frontend.
-- **Vue Router**: Libreria di routing ufficiale per Vue.js.
-- **TailwindCSS**: Framework CSS utility-first per un design rapido e personalizzato.
-- **Axios**: Client HTTP basato su Promise per effettuare richieste API.
-- **OpenAI API**: Per l'accesso ai modelli GPT-4o (testo) e DALL-E 3 (immagini).
+- **Vue.js 3**: Progressive JavaScript framework for building user interfaces.
+- **Vite**: Modern and fast build tool for frontend projects.
+- **Vue Router**: Official routing library for Vue.js.
+- **TailwindCSS**: Utility-first CSS framework for rapid and custom design.
+- **Axios**: Promise-based HTTP client for making API requests.
+- **OpenAI API**: For access to GPT-4o (text) and DALL-E 3 (image) models.
 
-## Origine del Progetto
+## Project Origin
 
-Questo progetto è nato come un'evoluzione ed esercitazione pratica, partendo dall'ispirazione fornita da un articolo di **Matteo Flora** sulla pubblicazione su LinkedIn con l'AI:
-[Pubblicare su Linkedin con la AI](https://www.matteoflora.com/Pubblicare-su-Linkedin-con-la-AI-1020eadfaffe802e975af4bab780d9ef).
+This project originated as an evolution and practical exercise, inspired by an article by **Matteo Flora** on publishing on LinkedIn with AI:
+[Publishing on LinkedIn with AI](https://www.matteoflora.com/Pubblicare-su-Linkedin-con-la-AI-1020eadfaffe802e975af4bab780d9ef).
 
-L'obiettivo iniziale era quello di mettere in pratica i concetti appresi, sviluppando un frontend completo in Vue.js per interagire con le API di OpenAI e fornire strumenti utili alla community.
+The initial goal was to put the learned concepts into practice by developing a complete frontend in Vue.js to interact with the OpenAI APIs and provide useful tools to the community.
 
-## 🤝 Contributi
+## 🤝 Contributions
 
-I contributi sono benvenuti! Se hai idee per migliorare l'applicazione, correggere bug o aggiungere nuove funzionalità, sentiti libero di aprire una Issue o una Pull Request nel repository del progetto (se disponibile pubblicamente).
+Contributions are welcome! If you have ideas for improving the application, fixing bugs, or adding new features, feel free to open an Issue or a Pull Request in the project repository (if publicly available).
 
-## Licenza
+## License
 
-Questo progetto è rilasciato sotto la **GNU General Public License v3.0 (GPL-3.0-or-later)**, come specificato nel `package.json`.
-Il testo completo della licenza è disponibile nel file `LICENSE` all'interno di questo repository.
-Puoi anche visualizzare la licenza online su [gnu.org/licenses/gpl-3.0.html](https://www.gnu.org/licenses/gpl-3.0.html).
+This project is released under the **GNU General Public License v3.0 (GPL-3.0-or-later)**, as specified in the `package.json`.
+The full text of the license is available in the `LICENSE` file within this repository.
+You can also view the license online at [gnu.org/licenses/gpl-3.0.html](https://www.gnu.org/licenses/gpl-3.0.html).
 
-## 🙏 Ringraziamenti
+## 🙏 Acknowledgments
 
-- Un ringraziamento speciale a **Matteo Flora** per l'articolo originale che ha ispirato questo progetto.
-- Alla community di sviluppatori Vue.js e TailwindCSS per gli eccellenti strumenti e documentazione.
+- A special thanks to **Matteo Flora** for the original article that inspired this project.
+- To the Vue.js and TailwindCSS developer community for the excellent tools and documentation.
 
-_La sezione "Stato del progetto" è stata integrata all'inizio del documento tramite il badge Netlify._
+_The "Project Status" section has been integrated at the beginning of the document via the Netlify badge._

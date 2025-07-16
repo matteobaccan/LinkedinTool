@@ -27,7 +27,7 @@
         <div>
           <button type="submit"
                   class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-            Accedi
+            Login
           </button>
         </div>
       </form>
@@ -49,16 +49,16 @@ export default {
   methods: {
     checkAuthentication() {
       if (localStorage.getItem('isAuthenticated') === 'true') {
-        this.$router.push('/CreaPost');
+        this.$router.push('/CreatePost');
       }
     },
     login() {
       if (this.username === import.meta.env.VITE_APP_USERNAME &&
           this.password === import.meta.env.VITE_APP_PASSWORD) {
         localStorage.setItem('isAuthenticated', 'true')
-        this.$router.push('/CreaPost')
+        this.$router.push('/CreatePost')
       } else {
-        alert('Credenziali non valide')
+        alert('Invalid credentials')
       }
     }
   }

@@ -11,9 +11,9 @@
       <!-- Aside component -->
       <Aside :isOpen="isMenuOpen" @toggle="toggleMenu" class="flex-shrink-0 h-full overflow-y-auto" />
 
-      <!-- Contenuto principale -->
+      <!-- Main content -->
       <main class="flex-1 p-4 md:p-10 overflow-y-auto">
-        <h1 class="text-2xl font-bold mb-5">Crea Commento</h1>
+        <h1 class="text-2xl font-bold mb-5">Create Comment</h1>
         <div class="space-y-4">
           <div>
             <label class="block text-sm font-medium text-gray-700">Post</label>
@@ -26,14 +26,14 @@
               class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm"></textarea>
           </div>
           <div>
-            <label class="block text-sm font-medium text-gray-700">Risultato</label>
-            <textarea v-model="risultato" rows="10" readonly
+            <label class="block text-sm font-medium text-gray-700">Result</label>
+            <textarea v-model="result" rows="10" readonly
               class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm bg-gray-50"></textarea>
           </div>
-          <button @click="generaCommento"
+          <button @click="generateComment"
             class="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 disabled:bg-blue-300"
             :disabled="isGenerating">
-            {{ isGenerating ? 'Generazione in corso...' : 'Genera Commento' }}
+            {{ isGenerating ? 'Generating...' : 'Generate Comment' }}
           </button>
         </div>
       </main>
@@ -53,32 +53,32 @@ export default {
     return {
       ...shared.data(),
       post: '',
-      prompt: `# Generatore di Commenti per LinkedIn
-Sei un assistente AI specializzato nella creazione di commenti coinvolgenti per post di LinkedIn.
-Il tuo compito è creare un commento basato sul <POST> fornito, aggiungendo un punto di vista non banale e POSITIVO.
-## Linee guida
-- Adotta il tono di voce di un influencer esperto su LinkedIn (15+ anni di esperienza nella creazione di contenuti)
-- Cattura subito l'attenzione dell'autore con un ringraziamento, un complimento o comunque una forma di attenzione da subito: evita aperture banali o saluti formali.
-- Evita termini desueti come "cruciale" e giri di parole non di uso comune. Pensa in italiano.
-- Struttura il testo per una lettura rapida: frasi brevi e incisive.
-- Assicurati che il contenuto sia 100% originale.
-- Includi una domanda o affermazione stimolante per incoraggiare commenti.
-- Concludi con una chiara e coinvolgente azione da intraprendere da subito o call-to action precisa per invitare al confronto
-- Mantieni un tono professionale ma conversazionale. Usa il tu
-- Rimani al di sotto delle 1000 battute.
-- Rispondi esclusivamente in ITALIANO.
-# Post da commentare
-Ecco il <POST> da commentare:`,
-      risultato: '',
+      prompt: `# LinkedIn Comment Generator
+You are an AI assistant specialized in creating engaging comments for LinkedIn posts.
+Your task is to create a comment based on the provided <POST>, adding a non-trivial and POSITIVE point of view.
+## Guidelines
+- Adopt the tone of voice of an experienced LinkedIn influencer (15+ years of content creation experience)
+- Immediately capture the author's attention with a thank you, a compliment, or some form of immediate attention: avoid trivial openings or formal greetings.
+- Avoid obsolete terms and uncommon phrases. Think in English.
+- Structure the text for quick reading: short and incisive sentences.
+- Ensure the content is 100% original.
+- Include a thought-provoking question or statement to encourage comments.
+- Conclude with a clear and engaging call-to-action to invite discussion.
+- Maintain a professional yet conversational tone. Use "you."
+- Stay under 1000 characters.
+- Respond exclusively in ENGLISH.
+# Post to comment on
+Here is the <POST> to comment on:`,
+      result: '',
       isGenerating: false
     }
   },
   methods: {
     ...shared.methods,
-    async generaCommento() {
+    async generateComment() {
       const chatgptKey = localStorage.getItem('chatgptKey')
       if (!chatgptKey || !this.post || !this.prompt) {
-        alert('Per favore, assicurati di aver configurato la chiave API e fornisci il contenuto della pagina.');
+        alert('Please make sure you have configured the API key and provided the page content.');
         return;
       }
 
@@ -102,10 +102,10 @@ Ecco il <POST> da commentare:`,
           }
         });
 
-        this.risultato = response.data.choices[0].message.content;
+        this.result = response.data.choices[0].message.content;
       } catch (error) {
-        console.error('Errore nella generazione del post:', error);
-        alert('Si è verificato un errore durante la generazione del post. Controlla la console per i dettagli.');
+        console.error('Error generating post:', error);
+        alert('An error occurred while generating the post. Check the console for details.');
       } finally {
         this.isGenerating = false;
       }

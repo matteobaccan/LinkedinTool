@@ -1,7 +1,7 @@
 <template>
     <div class="flex items-center justify-center min-h-screen bg-gray-100">
       <div class="w-full max-w-md bg-white rounded-lg shadow-md p-8">
-        <h2 class="text-2xl font-bold mb-6 text-center">Configurazione</h2>
+        <h2 class="text-2xl font-bold mb-6 text-center">Config</h2>
         <form @submit.prevent="saveConfig">
           <div class="mb-4">
             <label for="chatgptKey" class="block text-sm font-medium text-gray-700 mb-2">ChatGPT API Key</label>
@@ -17,7 +17,7 @@
             type="submit"
             class="w-full bg-indigo-600 text-white py-2 px-4 rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
           >
-            Salva Configurazione
+            Save Config
           </button>
         </form>
       </div>

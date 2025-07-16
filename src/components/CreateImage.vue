@@ -11,12 +11,12 @@
       <!-- Aside component -->
       <Aside :isOpen="isMenuOpen" @toggle="toggleMenu" class="flex-shrink-0 h-full overflow-y-auto" />
 
-      <!-- Contenuto principale -->
+      <!-- Main content -->
       <main class="flex-1 p-4 md:p-10 overflow-y-auto">
-        <h1 class="text-2xl font-bold mb-5">Crea Immagine</h1>
+        <h1 class="text-2xl font-bold mb-5">Create Image</h1>
         <div class="space-y-4">
           <div>
-            <label class="block text-sm font-medium text-gray-700">Contenuto sul quale generare una immagine: al massimo 1000 caratteri - la lunghezza del prompt</label>
+            <label class="block text-sm font-medium text-gray-700">Content on which to generate an image: maximum 1000 characters - the length of the prompt</label>
             <textarea v-model="post" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2"
               rows="4"></textarea>
           </div>
@@ -26,16 +26,16 @@
               rows="4"></textarea>
           </div>
           <div>
-            <label class="block text-sm font-medium text-gray-700">Risultato</label>
-            <div v-if="risultato" class="mt-1 border border-gray-300 rounded-md p-2">
-              <img :src="risultato" alt="Immagine generata" class="max-w-full h-auto">
+            <label class="block text-sm font-medium text-gray-700">Result</label>
+            <div v-if="result" class="mt-1 border border-gray-300 rounded-md p-2">
+              <img :src="result" alt="Generated image" class="max-w-full h-auto">
             </div>
-            <p v-else class="mt-1 text-gray-500">Nessuna immagine generata</p>
+            <p v-else class="mt-1 text-gray-500">No image generated</p>
           </div>
-          <button @click="generaImmagine"
+          <button @click="generateImage"
             class="px-4 py-2 bg-green-500 text-white rounded-md hover:bg-green-600 disabled:bg-green-300"
             :disabled="isGenerating">
-            {{ isGenerating ? 'Generazione in corso...' : 'Genera Immagine' }}
+            {{ isGenerating ? 'Generating...' : 'Generate Image' }}
           </button>
         </div>
       </main>
@@ -54,29 +54,29 @@ export default {
     return {
       ...shared.data(),
       post: '',
-      prompt: `Crea una immagine corporate, in formato 16:9, per questo articolo.
-Se possibile, rendila meno "asettica" e più "personale". prediligi la realisticità alla spettacolarità. `,
-      risultato: '',
+      prompt: `Create a corporate image, in 16:9 format, for this article.
+If possible, make it less "aseptic" and more "personal". Prefer realism to spectacularity.`,
+      result: '',
       isGenerating: false
     }
   },
   methods: {
     ...shared.methods,
-    async generaImmagine() {
+    async generateImage() {
       const chatgptKey = localStorage.getItem('chatgptKey')
       if (!chatgptKey) {
-        alert('Per favore, assicurati di aver configurato la chiave API');
+        alert('Please make sure you have configured the API key');
         return;
       }
 
       if (!this.post || !this.prompt) {
-        alert('Per favore, compila tutti i campi.');
+        alert('Please fill in all fields.');
         return;
       }
 
       this.isGenerating = true;
 
-      let promptParameter = `${this.prompt}\n\nArticolo: ${this.post}`
+      let promptParameter = `${this.prompt}\n\nArticle: ${this.post}`
       if( promptParameter.length > 1000 ) {
         promptParameter = promptParameter.substring(0, 1000);
       }
@@ -95,10 +95,10 @@ Se possibile, rendila meno "asettica" e più "personale". prediligi la realistic
           }
         });
 
-        this.risultato = response.data.data[0].url;
+        this.result = response.data.data[0].url;
       } catch (error) {
-        console.error('Errore nella generazione dell\'immagine:', error);
-        alert('Si è verificato un errore durante la generazione dell\'immagine. Controlla la console per i dettagli.');
+        console.error('Error generating image:', error);
+        alert('An error occurred while generating the image. Check the console for details.');
       } finally {
         this.isGenerating = false;
       }

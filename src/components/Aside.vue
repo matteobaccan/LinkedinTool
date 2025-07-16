@@ -34,10 +34,10 @@ export default {
   data() {
     return {
       menuItems: [
-        { label: 'Crea Post', route: '/CreaPost', icon: '📝' },
-        { label: 'Crea Immagine', route: '/CreaImmagine', icon: '🖼️' },
-        { label: 'Crea Commento', route: '/CreaCommento', icon: '💬' },
-        { label: 'Configurazione', route: '/Config', icon: '⚙️' },
+        { label: 'Create Post', route: '/CreatePost', icon: '📝' },
+        { label: 'Create Image', route: '/CreateImage', icon: '🖼️' },
+        { label: 'Create Comment', route: '/CreateComment', icon: '💬' },
+        { label: 'Config', route: '/Config', icon: '⚙️' },
       ]
     }
   },
